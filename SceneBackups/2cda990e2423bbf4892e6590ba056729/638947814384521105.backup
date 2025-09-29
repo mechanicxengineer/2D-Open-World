@@ -12767,12 +12767,13 @@ MonoBehaviour:
   health: 2
   enmeyName: The log
   baseAttack: 1
-  moveSpeed: 4
+  moveSpeed: 5
   target: {fileID: 0}
   homePosition: {fileID: 0}
   animator: {fileID: 0}
   chaseRadius: 4
-  attackRadius: 1
+  attackRadius: 2
+  acceptationRadius: 1
 --- !u!1 &1737808982 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6898048760799758520, guid: 2b48dd2f1c1453746a8df37b1e9a06cd, type: 3}
@@ -13162,7 +13163,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -13281,8 +13282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd66fbe4521c324da0f3172d4e1fcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 25
-  knockTime: 0.3
+  thrust: 5
+  knockTime: 0.2
 --- !u!1 &2085111993
 GameObject:
   m_ObjectHideFlags: 0
