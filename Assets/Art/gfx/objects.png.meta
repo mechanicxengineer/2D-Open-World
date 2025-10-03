@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -173,13 +173,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_3
+      name: heart_1
       rect:
         serializedVersion: 2
-        x: 64
-        y: 305
-        width: 14
-        height: 13
+        x: 63
+        y: 304
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,13 +194,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_4
+      name: heart_2
       rect:
         serializedVersion: 2
-        x: 80
-        y: 305
-        width: 14
-        height: 13
+        x: 79
+        y: 304
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -215,13 +215,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_5
+      name: heart_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 305
-        width: 14
-        height: 13
+        x: 95
+        y: 304
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,13 +236,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_6
+      name: heart_4
       rect:
         serializedVersion: 2
-        x: 112
-        y: 305
-        width: 14
-        height: 13
+        x: 111
+        y: 304
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -257,13 +257,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_7
+      name: heart_5
       rect:
         serializedVersion: 2
-        x: 128
-        y: 305
-        width: 14
-        height: 13
+        x: 127
+        y: 304
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -2210,7 +2210,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: objects_123
+      name: HealthHolder
       rect:
         serializedVersion: 2
         x: 0
@@ -2703,11 +2703,17 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      HealthHolder: -2036789762
       Pot: 2055865195
       Pot_Break_1: -59688309
       Pot_Break_2: -994523892
       Pot_Break_3: -1419963041
       Pot_Break_4: -193929569
+      heart_1: -1199685337
+      heart_2: 754311645
+      heart_3: 1188454779
+      heart_4: 1948299142
+      heart_5: -1333378245
       objects_0: 1011082116
       objects_1: -993871212
       objects_10: 1120103430
@@ -2736,7 +2742,6 @@ TextureImporter:
       objects_120: -1768022025
       objects_121: -285650158
       objects_122: 44849010
-      objects_123: -2036789762
       objects_124: 1461959558
       objects_125: -5905053
       objects_126: -500357538
@@ -2771,7 +2776,6 @@ TextureImporter:
       objects_27: 1710114574
       objects_28: 1825302825
       objects_29: 2140289918
-      objects_3: -1199685337
       objects_30: -220496556
       objects_31: -420671593
       objects_32: 644494598
@@ -2782,7 +2786,6 @@ TextureImporter:
       objects_37: -1472216033
       objects_38: -1918756794
       objects_39: -1210218412
-      objects_4: 754311645
       objects_40: 1725083031
       objects_41: -712062118
       objects_42: 695724967
@@ -2793,7 +2796,6 @@ TextureImporter:
       objects_47: 11478245
       objects_48: -1449882113
       objects_49: -853339601
-      objects_5: 1188454779
       objects_50: 952884720
       objects_51: -643089386
       objects_52: 953689861
@@ -2804,7 +2806,6 @@ TextureImporter:
       objects_57: -1161366850
       objects_58: -1002719341
       objects_59: 1528477867
-      objects_6: 1948299142
       objects_60: 1693999096
       objects_61: -1446660775
       objects_62: -839654337
@@ -2815,7 +2816,6 @@ TextureImporter:
       objects_67: 194090698
       objects_68: -197982448
       objects_69: 2009121081
-      objects_7: -1333378245
       objects_70: -904954962
       objects_71: -937926155
       objects_73: 283134073

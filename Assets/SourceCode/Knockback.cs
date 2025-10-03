@@ -5,28 +5,40 @@ public class Knockback : MonoBehaviour
 {
     public float thrust = 10f;
     public float knockTime = 0.3f;
+    public float damage;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Breakable") && this.gameObject.CompareTag("Player"))
         {
-            Rigidbody2D enemyRb = other.GetComponent<Rigidbody2D>();
-            if (enemyRb != null)
+            other.GetComponent<Pot>().Smash();
+        }
+
+        if (other.CompareTag("Enemy") || other.CompareTag("Player"))
+        {
+            Rigidbody2D Hit = other.GetComponent<Rigidbody2D>();
+            if (Hit != null)
             {
-                Vector2 difference = (enemyRb.transform.position - transform.position).normalized;
-                enemyRb.AddForce(difference * thrust, ForceMode2D.Impulse);
-                StartCoroutine(KnockCo(enemyRb));
+                Vector2 difference = (Hit.transform.position - transform.position).normalized;
+                difference = difference.normalized * thrust;
+                Hit.AddForce(difference, ForceMode2D.Impulse);
+                if (other.gameObject.CompareTag("Enemy") && other.isTrigger)
+                {
+                    Hit.GetComponent<Enemy>().currentState = EnemyState.stagger;
+                    other.GetComponent<Enemy>().KnockEnemy(Hit, knockTime, damage);
+                }
+                if (other.gameObject.CompareTag("Player"))
+                {
+                    if (other.GetComponent<PlayerMovement>().currentState != PlayerState.stagger)
+                    {
+                        Hit.GetComponent<PlayerMovement>().currentState = PlayerState.stagger;
+                        other.GetComponent<PlayerMovement>().KnockPlayer(knockTime, damage);
+                    }
+                }
+
             }
         }
     }
 
-    private IEnumerator KnockCo(Rigidbody2D enemyRb)
-    {
-        if (enemyRb != null)
-        {
-            yield return new WaitForSeconds(knockTime);
-            enemyRb.velocity = Vector2.zero;
 
-        }
-    }
 }
