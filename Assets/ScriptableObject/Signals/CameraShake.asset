@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfa55f1782f9541488d019a42c0851dd, type: 3}
-  m_Name: PlayerInventory
+  m_Script: {fileID: 11500000, guid: 9445da0962da64e4fa5f54d5830a91af, type: 3}
+  m_Name: CameraShake
   m_EditorClassIdentifier: 
-  currentItem: {fileID: 0}
-  items: []
-  numberOfKeys: 98
+  listeners: []

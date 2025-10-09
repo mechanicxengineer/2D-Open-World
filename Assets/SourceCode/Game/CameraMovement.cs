@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Burst.Intrinsics;
 using UnityEngine;
 
@@ -7,9 +8,11 @@ public class CameraMovement : MonoBehaviour
 	public float smoothSpeed;
 	public Vector2 minPosition;
 	public Vector2 maxPosition;
+	public Animator animator;
 
 	void Start()
 	{
+		animator = GetComponent<Animator>();
 		transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
 	}
 
@@ -23,4 +26,16 @@ public class CameraMovement : MonoBehaviour
 			transform.position = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 		}
 	}
+
+	public void BeginCameraShake()
+	{
+		animator.SetBool("shake", true);
+		StartCoroutine(ShakeCo());
+	}
+	
+	public IEnumerator ShakeCo()
+    {
+		yield return null;
+		animator.SetBool("shake", false);
+    }
 }

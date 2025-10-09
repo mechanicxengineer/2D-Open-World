@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
 	public PlayerState currentState;
 	public FloatValue currentHealth;
 	public SignalObject playerHealthSignal;
+	public SignalObject	CameraShakeSignal;
 	public VectorValue startingPosition;
 	public Inventory playerInventory;
 	public SpriteRenderer receiveItemSprite;
@@ -122,9 +123,9 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-
 	private IEnumerator KnockCo(float knockTime)
 	{
+		CameraShakeSignal.Raise();
 		if (rigidbody2d != null)
 		{
 			yield return new WaitForSeconds(knockTime);

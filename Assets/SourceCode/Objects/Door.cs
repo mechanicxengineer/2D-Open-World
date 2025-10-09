@@ -1,16 +1,53 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public enum DoorType
 {
-	// Start is called before the first frame update
-	void Start()
-	{
+	key,
+	enemy,
+	button
+}
 
+public class Door : Interactable
+{
+	[Header("Door Settings")]
+	public DoorType doorType;
+	public bool open = false;
+	public Inventory playerInventory;
+	public SpriteRenderer doorSprite;
+	public BoxCollider2D doorCollider;
+
+	private void Start()
+	{
+		doorSprite = GetComponentInParent<SpriteRenderer>();
+		doorCollider = doorSprite.GetComponent<BoxCollider2D>();
 	}
 
-	// Update is called once per frame
-	void Update()
+	private void Update()
 	{
-
+		if (Input.GetButtonDown("AllRounder"))
+		{
+			if (playerInRange && doorType == DoorType.key)
+			{
+				if (playerInventory.numberOfKeys > 0)
+				{
+					playerInventory.numberOfKeys--;
+					Open();
+				}
+			}
+		}
 	}
+
+	public void Open()
+	{
+		doorSprite.enabled = false;
+		open = true;
+		doorCollider.enabled = false;
+		GetComponent<BoxCollider2D>().enabled = false;
+	}
+
+	public void Close()
+	{
+	    
+	}
+
 }

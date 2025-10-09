@@ -54,6 +54,7 @@ public class Log : Enemy
         {
             animator.SetBool("wakeup", false);
         }
+        
     }
 
     private void SetAnimationFloat(Vector2 setVector)

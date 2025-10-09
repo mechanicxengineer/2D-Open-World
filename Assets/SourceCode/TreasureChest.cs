@@ -21,7 +21,7 @@ public class TreasureChest : Interactable
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetButtonDown("Sign") && playerInRange)
+		if (Input.GetButtonDown("AllRounder") && playerInRange)
 		{
 			if (!isOpen)
 			{

@@ -17,11 +17,12 @@ public class Enemy : MonoBehaviour
 	public string enmeyName;
 	public int baseAttack;
 	public float moveSpeed;
+	public GameObject deathEffect;
 
     private void Awake()
-    {
+	{
 		health = maxHealth.initialValue;
-    }
+	}
 
 	private void TakeDamage(float damage)
 	{
@@ -30,8 +31,17 @@ public class Enemy : MonoBehaviour
 		{
 			//	Die
 			//	TODO: The log will sleep paramanent
-			Debug.Log(enmeyName + " has died");
+			DeathEffect();
 			this.gameObject.SetActive(false);
+		}
+	}
+
+	private void DeathEffect()
+	{
+		if (deathEffect != null)
+		{
+			GameObject Effect = Instantiate(deathEffect, transform.position, Quaternion.identity);
+			Destroy(Effect, 1f);
 		}
 	}
 
