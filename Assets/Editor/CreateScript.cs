@@ -1,76 +1,116 @@
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.RegularExpressions;
+using Unity.VisualScripting;
 
-public class CreateScript: EditorWindow
+public class CreateScript : EditorWindow
 {
+    private string scriptName = "NewScript";
+    private string selectedFolder = "Assets/SourceCode";
+    private List<string> availableBaseClasses = new List<string>();
+    private int selectedBaseClassIndex = 0;
+    private bool autoFocus = true;
+
     [MenuItem("Component/Scripts/New Script %&n")]
     public static void ShowWindow()
     {
-        var window = EditorWindow.GetWindow(typeof(CreateScript));
-        window.minSize = new Vector2(400, 80);
-        window.maxSize = new Vector2(400, 80);
-        window.Center();      
+        var window = GetWindow<CreateScript>();
+        window.titleContent = new GUIContent("Create Script");
+        window.minSize = new Vector2(400, 140);
+        window.maxSize = new Vector2(400, 140);
+        window.Center();
+        ((CreateScript)window).LoadBaseClasses();
     }
-
-    private bool autoFocus = true;
-    private string scriptName = "NewScript";
-    private string selectedFolder = "Assets\\SourceCode"; // Default folder
 
     private void OnGUI()
     {
         EditorGUI.BeginChangeCheck();
         GUI.SetNextControlName(scriptName);
 
+        GUILayout.Label("Create New Script", EditorStyles.boldLabel);
         scriptName = EditorGUILayout.TextField("Script Name", scriptName);
+        selectedBaseClassIndex = EditorGUILayout.Popup("Inherits From", selectedBaseClassIndex, availableBaseClasses.ToArray());
         selectedFolder = EditorGUILayout.TextField("Folder", selectedFolder);
 
         if (GUILayout.Button("Select Folder"))
         {
-            string path = EditorUtility.OpenFolderPanel("Select Folder", "", "");
+            string path = EditorUtility.OpenFolderPanel("Select Folder", Application.dataPath, "");
             if (!string.IsNullOrEmpty(path))
             {
-                selectedFolder = path;
+                if (path.StartsWith(Application.dataPath))
+                {
+                    selectedFolder = "Assets" + path.Substring(Application.dataPath.Length);
+                }
+                else
+                {
+                    EditorUtility.DisplayDialog("Invalid Folder", "Please select a folder inside the Assets directory.", "OK");
+                }
             }
         }
 
         if (autoFocus)
         {
-            EditorGUI.FocusTextInControl("NewScript");
+            EditorGUI.FocusTextInControl(scriptName);
             autoFocus = false;
         }
 
-        if (GUILayout.Button("Create Script") || Event.current.keyCode == KeyCode.Return)
+        if (GUILayout.Button("Create Script") || (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return))
         {
             EditorGUI.EndChangeCheck();
             CreateNewScript();
         }
     }
 
-private void CreateNewScript()
-{
-    // Check if the folder exists, if not, create it
-    if (!System.IO.Directory.Exists(selectedFolder))
+    private void LoadBaseClasses()
     {
-        System.IO.Directory.CreateDirectory(selectedFolder);
+        availableBaseClasses.Clear();
+        availableBaseClasses.Add("MonoBehaviour"); // Default
+
+        string[] files = Directory.GetFiles("Assets/SourceCode", "*.cs", SearchOption.AllDirectories);
+        Regex classRegex = new Regex(@"public\s+class\s+(\w+)", RegexOptions.Compiled);
+
+        foreach (string file in files)
+        {
+            string[] lines = File.ReadAllLines(file);
+            foreach (string line in lines)
+            {
+                Match match = classRegex.Match(line);
+                if (match.Success)
+                {
+                    string className = match.Groups[1].Value;
+                    if (!availableBaseClasses.Contains(className))
+                    {
+                        availableBaseClasses.Add(className);
+                    }
+                    break;
+                }
+            }
+        }
     }
 
-    string scriptPath = System.IO.Path.Combine(selectedFolder, scriptName + ".cs");
+    private void CreateNewScript()
+    {
+        if (!Directory.Exists(selectedFolder))
+        {
+            Directory.CreateDirectory(selectedFolder);
+        }
 
-    string template = "using UnityEngine;\n\npublic class {0} : MonoBehaviour\n{{\n\t// Start is called before the first frame update\n\tvoid Start()\n\t{{\n\n\t}}\n\n\t// Update is called once per frame\n\tvoid Update()\n\t{{\n\n\t}}\n}}";
-    string scriptContent = string.Format(template, scriptName.Replace(" ", ""), scriptName);
+        string baseClass = availableBaseClasses[selectedBaseClassIndex];
+        string cleanName = scriptName.Replace(" ", "");
+        string scriptPath = Path.Combine(selectedFolder, cleanName + ".cs");
 
-    System.IO.File.WriteAllText(scriptPath, scriptContent);
-    AssetDatabase.Refresh();
+        string template = $"using UnityEngine;\n\npublic class {cleanName} : {baseClass}\n{{\n\tvoid Start()\n\t{{\n\t\t\n\t}}\n\n\tvoid Update()\n\t{{\n\t\t\n\t}}\n}}";
 
-    Object createdScript = AssetDatabase.LoadAssetAtPath(scriptPath, typeof(Object));
-    Selection.activeObject = createdScript;
-    EditorGUIUtility.PingObject(createdScript);
+        File.WriteAllText(scriptPath, template);
+        AssetDatabase.Refresh();
 
-    // Open the newly created script in the default script editor
-    AssetDatabase.OpenAsset(createdScript);
+        Object createdScript = AssetDatabase.LoadAssetAtPath<Object>(scriptPath);
+        Selection.activeObject = createdScript;
+        EditorGUIUtility.PingObject(createdScript);
+        AssetDatabase.OpenAsset(createdScript);
 
-    Close();
-}
-
+        Close();
+    }
 }

@@ -17155,10 +17155,6 @@ PrefabInstance:
       value: SceneTransition
       objectReference: {fileID: 0}
     - target: {fileID: 4504165018864868860, guid: bc569fa8dc4deec49ae0eb62d00459f2, type: 3}
-      propertyPath: fadeWait
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504165018864868860, guid: bc569fa8dc4deec49ae0eb62d00459f2, type: 3}
       propertyPath: cameraMax
       value: 
       objectReference: {fileID: 11400000, guid: bcd1236a7645f2149bb9b1614dcd80a6, type: 2}
@@ -17183,22 +17179,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 49276c17f11c5ac4b9d68af078a5de48, type: 2}
     - target: {fileID: 4504165018864868860, guid: bc569fa8dc4deec49ae0eb62d00459f2, type: 3}
-      propertyPath: cameraNewMax.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504165018864868860, guid: bc569fa8dc4deec49ae0eb62d00459f2, type: 3}
-      propertyPath: cameraNewMax.y
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504165018864868860, guid: bc569fa8dc4deec49ae0eb62d00459f2, type: 3}
-      propertyPath: cameraNewMin.x
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504165018864868860, guid: bc569fa8dc4deec49ae0eb62d00459f2, type: 3}
-      propertyPath: cameraNewMin.y
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504165018864868860, guid: bc569fa8dc4deec49ae0eb62d00459f2, type: 3}
       propertyPath: playerPosition.x
       value: 6.5
       objectReference: {fileID: 0}
@@ -17221,10 +17201,6 @@ PrefabInstance:
     - target: {fileID: 5503980173058472383, guid: bc569fa8dc4deec49ae0eb62d00459f2, type: 3}
       propertyPath: m_Offset.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5503980173058472383, guid: bc569fa8dc4deec49ae0eb62d00459f2, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24104,11 +24080,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1677192800079604826, guid: aeacc0a70bfcf11418511f8a4d0a4474, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.41
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1677192800079604826, guid: aeacc0a70bfcf11418511f8a4d0a4474, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.81
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1677192800079604826, guid: aeacc0a70bfcf11418511f8a4d0a4474, type: 3}
       propertyPath: m_LocalPosition.z
@@ -24246,7 +24222,7 @@ Transform:
   m_GameObject: {fileID: 1920646386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: -2, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24265,7 +24241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 969573382}
-  smoothSpeed: 5
+  smoothSpeed: 0.1
   minPosition: {x: -4, y: -2}
   maxPosition: {x: 4, y: 2}
   animator: {fileID: 0}

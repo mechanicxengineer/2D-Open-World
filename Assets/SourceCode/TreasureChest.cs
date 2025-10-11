@@ -4,18 +4,29 @@ using TMPro;
 
 public class TreasureChest : Interactable
 {
+	[Header("Contents")]
 	public Item contents;
 	public Inventory playerInventory;
 	public bool isOpen;
+
+	public BoolValue storedOpen;
+	[Header("Signal and Dialog")]
 	public SignalObject raiseItem;
 	public GameObject dialogBox;
 	public TMP_Text dialogText;
+
+	[Header("Animation")]
 	private Animator animator;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		animator = GetComponent<Animator>();
+		isOpen = storedOpen.runtimeValue;
+		if (isOpen)
+        {
+			animator.SetBool("opened", true);
+        }
 	}
 
 	// Update is called once per frame
@@ -46,6 +57,7 @@ public class TreasureChest : Interactable
 		Context.Raise();
 		isOpen = true;
 		animator.SetBool("opened", true);
+		storedOpen.runtimeValue = isOpen;
 	}
 
 	public void ChestAlreadyOpen()
