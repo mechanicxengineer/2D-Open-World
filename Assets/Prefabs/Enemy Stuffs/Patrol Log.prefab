@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5938553946463720587}
   - component: {fileID: 6741882912633709261}
   - component: {fileID: 5748222434404106854}
+  - component: {fileID: 1809355531935290962}
   - component: {fileID: 2809417443777661850}
   m_Layer: 6
   m_Name: Patrol Log
@@ -227,6 +228,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8666787, y: 1.1064008}
   m_EdgeRadius: 0
+--- !u!114 &1809355531935290962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5796822754089452149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c593e1374cf3c4c40b1d3b02d09fc84f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  maxHealth: {fileID: 11400000, guid: 78dbc963abd4e284a982e3dd8d599ebf, type: 2}
+  health: 3
+  enmeyName: Patrol Log
+  baseAttack: 1
+  moveSpeed: 1
+  deathEffect: {fileID: 973623078033375646, guid: 6a2b923bef49bff43838ced0c6618941, type: 3}
+  logrb: {fileID: 0}
+  target: {fileID: 0}
+  homePosition: {fileID: 0}
+  chaseRadius: 3
+  attackRadius: 0.8
+  animator: {fileID: 0}
+  path:
+  - {fileID: 0}
+  - {fileID: 0}
+  currentPoint: 0
+  currentGoal: {fileID: 0}
+  roundingDistance: 0.1
 --- !u!114 &2809417443777661850
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class CreateScript : EditorWindow
     private List<string> availableBaseClasses = new List<string>();
     private int selectedBaseClassIndex = 0;
     private bool autoFocus = true;
+    private bool triggerCreateNextFrame = false;
 
     [MenuItem("Component/Scripts/New Script %&n")]
     public static void ShowWindow()
@@ -26,10 +27,9 @@ public class CreateScript : EditorWindow
 
     private void OnGUI()
     {
-        EditorGUI.BeginChangeCheck();
-        GUI.SetNextControlName(scriptName);
-
         GUILayout.Label("Create New Script", EditorStyles.boldLabel);
+
+        GUI.SetNextControlName("ScriptNameField");
         scriptName = EditorGUILayout.TextField("Script Name", scriptName);
         selectedBaseClassIndex = EditorGUILayout.Popup("Inherits From", selectedBaseClassIndex, availableBaseClasses.ToArray());
         selectedFolder = EditorGUILayout.TextField("Folder", selectedFolder);
@@ -37,28 +37,39 @@ public class CreateScript : EditorWindow
         if (GUILayout.Button("Select Folder"))
         {
             string path = EditorUtility.OpenFolderPanel("Select Folder", Application.dataPath, "");
-            if (!string.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path) && path.StartsWith(Application.dataPath))
             {
-                if (path.StartsWith(Application.dataPath))
-                {
-                    selectedFolder = "Assets" + path.Substring(Application.dataPath.Length);
-                }
-                else
-                {
-                    EditorUtility.DisplayDialog("Invalid Folder", "Please select a folder inside the Assets directory.", "OK");
-                }
+                selectedFolder = "Assets" + path.Substring(Application.dataPath.Length);
+            }
+            else
+            {
+                EditorUtility.DisplayDialog("Invalid Folder", "Please select a folder inside the Assets directory.", "OK");
             }
         }
 
         if (autoFocus)
         {
-            EditorGUI.FocusTextInControl(scriptName);
+            EditorGUI.FocusTextInControl("ScriptNameField");
             autoFocus = false;
         }
 
-        if (GUILayout.Button("Create Script") || (Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Return))
+        // 🔥 Detect Enter key and delay execution
+        if (Event.current.keyCode == KeyCode.Return)
         {
-            EditorGUI.EndChangeCheck();
+            GUI.FocusControl(null);           // Commit edits
+            triggerCreateNextFrame = true;    // Flag for next frame
+            Event.current.Use();              // Consume event
+        }
+
+        if (GUILayout.Button("Create Script"))
+        {
+            CreateNewScript();
+        }
+
+        // 🔁 Run script creation on next frame
+        if (triggerCreateNextFrame)
+        {
+            triggerCreateNextFrame = false;
             CreateNewScript();
         }
     }
@@ -66,7 +77,8 @@ public class CreateScript : EditorWindow
     private void LoadBaseClasses()
     {
         availableBaseClasses.Clear();
-        availableBaseClasses.Add("MonoBehaviour"); // Default
+        availableBaseClasses.Add("MonoBehaviour");
+        availableBaseClasses.Add("ScriptableObject");
 
         string[] files = Directory.GetFiles("Assets/SourceCode", "*.cs", SearchOption.AllDirectories);
         Regex classRegex = new Regex(@"public\s+class\s+(\w+)", RegexOptions.Compiled);
@@ -92,6 +104,12 @@ public class CreateScript : EditorWindow
 
     private void CreateNewScript()
     {
+        if (string.IsNullOrWhiteSpace(scriptName))
+        {
+            EditorUtility.DisplayDialog("Invalid Name", "Script name cannot be empty.", "OK");
+            return;
+        }
+
         if (!Directory.Exists(selectedFolder))
         {
             Directory.CreateDirectory(selectedFolder);

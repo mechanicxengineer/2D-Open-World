@@ -15,10 +15,10 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
-  - 
-  - 
-  - 
+  - Enemy Projectile
+  - Player Projectile
+  - Player
+  - Wall
   - 
   - 
   - 
@@ -47,9 +47,9 @@ TagManager:
   - name: Signs
     uniqueID: 3339913775
     locked: 0
-  - name: Player
-    uniqueID: 1272696057
-    locked: 0
   - name: Breakable
     uniqueID: 1508467575
+    locked: 0
+  - name: Player
+    uniqueID: 1272696057
     locked: 0

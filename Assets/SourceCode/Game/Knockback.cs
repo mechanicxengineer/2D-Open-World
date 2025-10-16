@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Knockback : MonoBehaviour
 {
-    public float thrust = 10f;
+    public float thrust = 3f;
     public float knockTime = 0.3f;
     public float damage;
 

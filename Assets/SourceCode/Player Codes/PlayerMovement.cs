@@ -15,16 +15,18 @@ public class PlayerMovement : MonoBehaviour
 	public PlayerState currentState;
 	public FloatValue currentHealth;
 	public SignalObject playerHealthSignal;
-	public SignalObject	CameraShakeSignal;
+	public SignalObject CameraShakeSignal;
+	public SignalObject reduceMagicSignal;
 	public VectorValue startingPosition;
 	public Inventory playerInventory;
 	public SpriteRenderer receiveItemSprite;
 	public float speed;
-
 	private Rigidbody2D rigidbody2d;
 	private Vector3 change;
 	private Animator animator;
-
+	[Header("Projectiles")]
+	public GameObject arrowProjectile;
+	public Item bow;
 
 	// Start is called before the first frame update
 	void Start()
@@ -49,6 +51,14 @@ public class PlayerMovement : MonoBehaviour
 		{
 			StartCoroutine(AttackCo());
 		}
+		else if (Input.GetButtonDown("Fire2") && currentState != PlayerState.attack &&
+			currentState != PlayerState.stagger)
+		{
+			if (playerInventory.CheckForItem(bow))
+			{
+				StartCoroutine(SecondAttackCo());
+			}
+        }
 		else if (currentState == PlayerState.walk || currentState == PlayerState.idle)
 		{
 			UpdateAnimationAndMove();
@@ -67,6 +77,38 @@ public class PlayerMovement : MonoBehaviour
 			currentState = PlayerState.walk;
 		}
 	}
+
+	private IEnumerator SecondAttackCo()
+	{
+		//animator.SetBool("attacking", true);
+		currentState = PlayerState.attack;
+		yield return null;
+		MakeArrow();
+		//animator.SetBool("attacking", false);
+		yield return new WaitForSeconds(.3f);
+		if (currentState != PlayerState.interact)
+		{
+			currentState = PlayerState.walk;
+		}
+	}
+
+	private void MakeArrow()
+	{
+		if (playerInventory.currentMagic > 0)
+        {
+			Vector2 temp = new Vector2(animator.GetFloat("moveX"), animator.GetFloat("moveY"));
+			Arrow arrow = Instantiate(arrowProjectile, transform.position, Quaternion.identity).GetComponent<Arrow>();
+			arrow.Setup(temp, ChooseArrowDirection());
+			playerInventory.UseMagic(arrow.cost);
+			reduceMagicSignal.Raise();
+        }
+    }
+
+	Vector3 ChooseArrowDirection()
+    {
+		float temp = Mathf.Atan2(animator.GetFloat("moveY"), animator.GetFloat("moveX")) * Mathf.Rad2Deg;
+		return new Vector3(0, 0, temp);
+    }
 
 	public void RaiseItem()
 	{

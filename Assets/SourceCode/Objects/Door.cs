@@ -47,7 +47,10 @@ public class Door : Interactable
 
 	public void Close()
 	{
-	    
+	    doorSprite.enabled = true;
+		open = false;
+		doorCollider.enabled = true;
+		GetComponent<BoxCollider2D>().enabled = true;
 	}
 
 }

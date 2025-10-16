@@ -1,21 +1,18 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Log : Enemy
 {
+    [Header("Components")]
     public Rigidbody2D logrb;
-    [Header("Target Variable")]
-    public Transform target;
-    public Transform homePosition;
-    public float chaseRadius;
-    public float attackRadius;
-
-    [Header("Animation")]
     public Animator animator;
 
-    void Start()
+    [Header("Target Variables")]
+    public Transform target;
+    public float chaseRadius = 5f;
+    public float attackRadius = 1f;
+
+    private void Awake()
     {
-        currentState = EnemyState.idle;
         logrb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
@@ -26,12 +23,20 @@ public class Log : Enemy
         }
         else
         {
-            Debug.LogWarning("Player not found in scene. Make sure the Player has the correct tag.");
+            Debug.LogWarning("Player not found. Make sure the Player has the correct tag.");
         }
-        animator.SetBool("wakeup", true);
     }
 
-    void FixedUpdate()
+    private void Start()
+    {
+        currentState = EnemyState.idle;
+        if (animator != null)
+        {
+            animator.SetBool("wakeup", true);
+        }
+    }
+
+    private void FixedUpdate()
     {
         if (target != null)
         {
@@ -41,14 +46,19 @@ public class Log : Enemy
 
     public virtual void CheckDistance()
     {
+        if (target == null || logrb == null || animator == null) return;
+
         float distance = Vector3.Distance(target.position, transform.position);
+
         if (distance <= chaseRadius && distance > attackRadius)
         {
             if (currentState == EnemyState.idle || currentState == EnemyState.walk)
             {
-                Vector3 temp = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
-                ChangeAnimation(temp - transform.position);
-                logrb.MovePosition(temp);
+                Vector3 moveTo = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+                Vector2 direction = (moveTo - transform.position).normalized;
+
+                ChangeAnimation(direction);
+                logrb.MovePosition(moveTo);
                 ChangeState(EnemyState.walk);
                 animator.SetBool("wakeup", true);
             }
@@ -57,7 +67,6 @@ public class Log : Enemy
         {
             animator.SetBool("wakeup", false);
         }
-        
     }
 
     private void SetAnimationFloat(Vector2 setVector)
@@ -70,25 +79,11 @@ public class Log : Enemy
     {
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
         {
-            if (direction.x > 0)
-            {
-                SetAnimationFloat(Vector2.right);
-            }
-            else if (direction.x < 0)
-            {
-                SetAnimationFloat(Vector2.left);
-            }
+            SetAnimationFloat(direction.x > 0 ? Vector2.right : Vector2.left);
         }
-        else if (Mathf.Abs(direction.x) < Mathf.Abs(direction.y))
+        else
         {
-            if (direction.y > 0)
-            {
-                SetAnimationFloat(Vector2.up);
-            }
-            else if (direction.y < 0)
-            {
-                SetAnimationFloat(Vector2.down);
-            }
+            SetAnimationFloat(direction.y > 0 ? Vector2.up : Vector2.down);
         }
     }
 
@@ -97,7 +92,7 @@ public class Log : Enemy
         if (currentState != newState)
         {
             currentState = newState;
-            // Perform any additional actions needed when changing states
+            // Optional: trigger animation or effects
         }
     }
 
@@ -106,6 +101,6 @@ public class Log : Enemy
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, chaseRadius);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRadius);     
+        Gizmos.DrawWireSphere(transform.position, attackRadius);
     }
 }
