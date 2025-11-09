@@ -75,14 +75,12 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void KnockEnemy(Rigidbody2D rigidBody, float knockTime, float damage)
+    public void KnockEnemy(Rigidbody2D rigidBody, float knockTime)
     {
         if (rigidBody != null && gameObject.activeInHierarchy)
         {
             StartCoroutine(KnockCo(rigidBody, knockTime));
         }
-
-        TakeDamage(damage);
     }
 
     private IEnumerator KnockCo(Rigidbody2D rigidBody, float knockTime)

@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,7 @@ public class Sign : Interactable
 	}
 
 	// Update is called once per frame
-	void Update()
+	public virtual void Update()
 	{
 		if (Input.GetButtonDown("AllRounder") && playerInRange)
 		{
@@ -34,7 +35,7 @@ public class Sign : Interactable
 
 	public override void OnTriggerExit2D(Collider2D other)
 	{
-		if (other.CompareTag("Player") && !other.isTrigger)
+		if (other.gameObject != null && other.CompareTag("Player") && !other.isTrigger)
 		{
 			Context.Raise();
 			playerInRange = false;

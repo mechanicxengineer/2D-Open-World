@@ -15,7 +15,7 @@ public class MainMenu : MonoBehaviour
 
 	public void SeekTheTruth()
 	{
-		SceneManager.LoadScene("OpenWorld");
+		SceneManager.LoadScene("HouseInteriorCutscene");
 	}
 
 	public void QuitToDesktop()

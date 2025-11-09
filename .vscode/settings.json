@@ -57,5 +57,6 @@
         "Temp/": true
     },
     "dotnet.defaultSolution": "2D-Open-World.sln",
-    "Codegeex.SidebarUI.LanguagePreference": "English"
+    "Codegeex.SidebarUI.LanguagePreference": "English",
+    "window.autoDetectColorScheme": false
 }

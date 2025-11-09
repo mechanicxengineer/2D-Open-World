@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: d83a2c5effadb604890591e260d91cfe
   - enabled: 1
+    path: Assets/Scenes/HouseInteriorCutscene.unity
+    guid: 6babd74855485f54aa08b2df94c43dab
+  - enabled: 1
     path: Assets/Scenes/OpenWorld.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1

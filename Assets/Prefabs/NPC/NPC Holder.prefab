@@ -97,7 +97,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4282948481565689478}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -153,6 +153,10 @@ MonoBehaviour:
   playerInRange: 0
   bounds: {fileID: 6678669170174908838}
   speed: 5
+  minMoveTime: 1
+  maxMoveTime: 1.5
+  minWaitTime: 0.1
+  maxWaitTime: 0.75
 --- !u!61 &4291456178252368833
 BoxCollider2D:
   m_ObjectHideFlags: 0
