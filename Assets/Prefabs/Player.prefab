@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 915569665404687354}
   - component: {fileID: 5341565303714261870}
   - component: {fileID: 7124933702435588310}
+  - component: {fileID: 4437826455783077931}
   m_Layer: 9
   m_Name: Left HitBox
   m_TagString: Player
@@ -108,9 +109,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd66fbe4521c324da0f3172d4e1fcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 2
-  knockTime: 0.2
+  thrust: 1
+  knockTime: 0.3
+  otherTag: Enemy
+--- !u!114 &4437826455783077931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 14262906396083077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ba9f93913fd4549bb393692aabffc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   damage: 1
+  otherTag: Enemy
 --- !u!1 &680787816846283964
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +136,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7533957285693249034}
   - component: {fileID: 792613579295519886}
+  - component: {fileID: 290901866823864176}
   - component: {fileID: 5905358677796587103}
+  - component: {fileID: 2510375061785765016}
   m_Layer: 9
   m_Name: Down HitBox
   m_TagString: Player
@@ -194,6 +211,18 @@ PolygonCollider2D:
       - {x: 0.3742279, y: -0.9787675}
       - {x: 0.39252222, y: -0.2933237}
   m_UseDelaunayMesh: 0
+--- !u!114 &290901866823864176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680787816846283964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef06710c6c192cd4099f01216b5dfe08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5905358677796587103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,9 +235,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd66fbe4521c324da0f3172d4e1fcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 2
+  thrust: 1
   knockTime: 0.2
+  otherTag: Enemy
+--- !u!114 &2510375061785765016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680787816846283964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ba9f93913fd4549bb393692aabffc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   damage: 1
+  otherTag: Enemy
 --- !u!1 &1125199715009457491
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +544,7 @@ GameObject:
   - component: {fileID: 819554555308250083}
   - component: {fileID: 1494249523571704347}
   - component: {fileID: 3225745292366910640}
+  - component: {fileID: 585511032514943766}
   m_Layer: 9
   m_Name: Right HitBox
   m_TagString: Player
@@ -597,9 +641,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd66fbe4521c324da0f3172d4e1fcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 2
-  knockTime: 0.2
+  thrust: 1
+  knockTime: 0.3
+  otherTag: Enemy
+--- !u!114 &585511032514943766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3452056981296041664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ba9f93913fd4549bb393692aabffc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   damage: 1
+  otherTag: Enemy
 --- !u!1 &4283955595614994107
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,6 +845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   speed: 10
+  change: {x: 0, y: 0, z: 0}
   startingPosition: {fileID: 11400000, guid: 49276c17f11c5ac4b9d68af078a5de48, type: 2}
   CameraShakeSignal: {fileID: 11400000, guid: 52037fa2840d84543bf6e1e8afa631dd, type: 2}
   reduceMagicSignal: {fileID: 11400000, guid: 661c8bd35d7e6f8428b1da10c698f3e5, type: 2}
@@ -800,6 +859,7 @@ MonoBehaviour:
   sprite: {fileID: 726407579614779463}
   arrowProjectile: {fileID: 5029030030330307243, guid: 64cf831aa9d410742806858beaf4f721, type: 3}
   bow: {fileID: 11400000, guid: 58b9ded88c884584dabc0f00a189b9d4, type: 2}
+  currentAbility: {fileID: 11400000, guid: 8c60b61f17571424989fc688616128cc, type: 2}
 --- !u!95 &3927130518676567422
 Animator:
   serializedVersion: 5
@@ -980,6 +1040,7 @@ GameObject:
   - component: {fileID: 6822783409765256246}
   - component: {fileID: 994860424374450512}
   - component: {fileID: 6219163174839114807}
+  - component: {fileID: 2171968636972094648}
   m_Layer: 9
   m_Name: Up HitBox
   m_TagString: Player
@@ -1076,9 +1137,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd66fbe4521c324da0f3172d4e1fcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 2
-  knockTime: 0.2
+  thrust: 1
+  knockTime: 0.3
+  otherTag: Enemy
+--- !u!114 &2171968636972094648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6811142274509656350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ba9f93913fd4549bb393692aabffc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   damage: 1
+  otherTag: Enemy
 --- !u!1 &7825890244282005495
 GameObject:
   m_ObjectHideFlags: 0

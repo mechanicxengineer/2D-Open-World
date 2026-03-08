@@ -15,11 +15,14 @@ public class TurretLog : Log
 
     private void Update()
     {
-        fireDelaySecond -= Time.deltaTime;
-        if (fireDelaySecond <= 0f)
+        if (canFire == false)
         {
-            canFire = true;
-            fireDelaySecond = fireDelay;
+            fireDelaySecond -= Time.deltaTime;
+            if (fireDelaySecond <= 0f)
+            {
+                canFire = true;
+                fireDelaySecond = fireDelay;
+            }
         }
     }
 
@@ -32,7 +35,6 @@ public class TurretLog : Log
         }
 
         float distance = Vector3.Distance(target.position, transform.position);
-
         if (distance <= chaseRadius && distance > attackRadius)
         {
             if ((currentState == EnemyState.idle || currentState == EnemyState.walk) && canFire)

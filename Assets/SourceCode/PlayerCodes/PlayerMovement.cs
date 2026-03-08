@@ -7,7 +7,8 @@ public enum PlayerState
 	walk,
 	attack,
 	interact,
-	stagger
+	stagger,
+	ability
 }
 
 public class PlayerMovement : MonoBehaviour
@@ -15,8 +16,10 @@ public class PlayerMovement : MonoBehaviour
 	public PlayerState currentState;
 	public float speed;
 	private Rigidbody2D rigidbody2d;
-	private Vector3 change;
+	public Vector3 change;
 	private Animator animator;
+
+	private Vector2 facingDirection = Vector2.down;
 
 	//	todo - health - Break off the health system into a own component
 	/*
@@ -51,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
 	public GameObject arrowProjectile;
 	public Item bow;
 
+	[SerializeField] private GenericAbility currentAbility;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -69,25 +74,45 @@ public class PlayerMovement : MonoBehaviour
 		change = Vector3.zero;
 		change.x = Input.GetAxisRaw("Horizontal");
 		change.y = Input.GetAxisRaw("Vertical");
-		if (Input.GetButtonDown("Fire1") && currentState != PlayerState.attack &&
-			currentState != PlayerState.stagger)
-		{
-			StartCoroutine(AttackCo());
-		}
-		//	todo - ability
-		else if (Input.GetButtonDown("Fire2") && currentState != PlayerState.attack &&
-			currentState != PlayerState.stagger)
-		{
-			if (playerInventory.CheckForItem(bow))
+		if (!IsRestrictedState(currentState))
+        {
+			if (Input.GetButtonDown("Fire1") && currentState != PlayerState.attack &&
+				currentState != PlayerState.stagger)
 			{
-				StartCoroutine(SecondAttackCo());
+				StartCoroutine(AttackCo());
 			}
-		}
-		else if (currentState == PlayerState.walk || currentState == PlayerState.idle)
-		{
-			UpdateAnimationAndMove();
-		}
+			//	todo - ability
+			else if (Input.GetButtonDown("Fire2") && currentState != PlayerState.attack &&
+				currentState != PlayerState.stagger)
+			{
+				if (playerInventory.CheckForItem(bow))
+				{
+					StartCoroutine(SecondAttackCo());
+				}
+			}
+			else if (currentState == PlayerState.walk || currentState == PlayerState.idle)
+			{
+				UpdateAnimationAndMove();
+			}
+			else if (Input.GetButtonDown("Ability"))
+			{
+				if (currentAbility)
+				{
+					StartCoroutine(AbilityCo(currentAbility.duration));
+				}
+			}
+        }
 	}
+	
+	bool IsRestrictedState(PlayerState currentState)
+    {
+		if (currentState == PlayerState.attack || currentState == PlayerState.ability)
+		{
+			return true;
+		}
+		return false;
+    }
+
 
 	private IEnumerator AttackCo()
 	{
@@ -167,6 +192,7 @@ public class PlayerMovement : MonoBehaviour
 			animator.SetFloat("moveX", change.x);
 			animator.SetFloat("moveY", change.y);
 			animator.SetBool("moving", true);
+			facingDirection = change;
 		}
 		else { animator.SetBool("moving", false); }
 	}
@@ -208,9 +234,9 @@ public class PlayerMovement : MonoBehaviour
 		{
 			StartCoroutine(FlashCo());
 			yield return new WaitForSeconds(knockTime);
-			rigidbody2d.velocity = Vector2.zero;
+			rigidbody2d.linearVelocity = Vector2.zero;
 			currentState = PlayerState.idle;
-			rigidbody2d.velocity = Vector2.zero;
+			rigidbody2d.linearVelocity = Vector2.zero;
 		}
 	}
 
@@ -229,4 +255,13 @@ public class PlayerMovement : MonoBehaviour
 		}
 		triggerCollider.enabled = true;
 	}
+
+	public IEnumerator AbilityCo(float abilityDuration)
+	{
+		currentState = PlayerState.ability;
+		yield return new WaitForSeconds(abilityDuration);
+		currentAbility.Ability(transform.position, facingDirection,
+			animator, rigidbody2d);
+		currentState = PlayerState.idle;
+    }
 }

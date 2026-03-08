@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 6516669742367606375}
   - component: {fileID: 4424676584401083986}
   - component: {fileID: 4582582643500272520}
+  - component: {fileID: 1264457468229741193}
+  - component: {fileID: -1854188812386921325}
   m_Layer: 7
   m_Name: Rock Projectile
   m_TagString: Untagged
@@ -75,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1272696057
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 1
   m_Sprite: {fileID: 937222840, guid: 595b1899447c31a45aaf95ca3ca4e5a5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -162,9 +164,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd66fbe4521c324da0f3172d4e1fcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 3
+  thrust: 1
   knockTime: 0.3
-  damage: 2
+  otherTag: Player
 --- !u!114 &4582582643500272520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,4 +181,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   directionToMove: {x: 0, y: 0}
-  lifeTime: 2
+--- !u!114 &1264457468229741193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969386472605777802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50940fe68116d794dbd762043c726220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherString: Player
+  damage: 1
+--- !u!114 &-1854188812386921325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3969386472605777802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a222e28519fef3749bd7aa732b527cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifetime: 2

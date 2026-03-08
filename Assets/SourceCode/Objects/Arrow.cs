@@ -29,7 +29,7 @@ public class Arrow : MonoBehaviour
 
     public void Setup(Vector2 velocity, Vector3 direction)
 	{
-		arrowRigidbody.velocity = velocity.normalized * speed;
+		arrowRigidbody.linearVelocity = velocity.normalized * speed;
 		transform.rotation = Quaternion.Euler(direction); 
 	}
 

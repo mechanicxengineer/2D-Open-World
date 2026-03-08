@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6499997735873758374}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 23, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1272696057
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1128056435, guid: 887a2088b12620240bebcb65f531ebde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -240,9 +240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd66fbe4521c324da0f3172d4e1fcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 3
-  knockTime: 0.2
-  damage: 1
+  thrust: 1
+  knockTime: 0.3
+  otherTag: Player
 --- !u!114 &2520282943731261395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,17 +257,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   maxHealth: {fileID: 11400000, guid: 78dbc963abd4e284a982e3dd8d599ebf, type: 2}
-  health: 5
-  enmeyName: Turret Log
+  health: 3
+  enemyName: 
   baseAttack: 0
   moveSpeed: 0
+  homePosition: {x: 23, y: 4}
   deathEffect: {fileID: 973623078033375646, guid: 6a2b923bef49bff43838ced0c6618941, type: 3}
+  lootTable: {fileID: 11400000, guid: afb79c6def38d414fbbd5615dfae57fe, type: 2}
+  roomSignal: {fileID: 0}
   logrb: {fileID: 0}
-  target: {fileID: 0}
-  homePosition: {fileID: 0}
-  chaseRadius: 6
-  attackRadius: 0
   animator: {fileID: 0}
+  target: {fileID: 0}
+  chaseRadius: 6
+  attackRadius: 2
   projectile: {fileID: 3969386472605777802, guid: 65c721ceb1eb9e842a7662d9ae3ef072, type: 3}
   fireDelay: 0.5
   canFire: 1

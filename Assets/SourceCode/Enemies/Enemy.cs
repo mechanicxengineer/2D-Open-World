@@ -89,7 +89,7 @@ public class Enemy : MonoBehaviour
         {
             currentState = EnemyState.stagger;
             yield return new WaitForSeconds(knockTime);
-            rigidBody.velocity = Vector2.zero;
+            rigidBody.linearVelocity = Vector2.zero;
             currentState = EnemyState.idle;
         }
     }

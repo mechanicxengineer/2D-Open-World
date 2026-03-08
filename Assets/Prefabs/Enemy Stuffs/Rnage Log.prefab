@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1272696057
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -1128056435, guid: 887a2088b12620240bebcb65f531ebde, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -240,9 +240,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd66fbe4521c324da0f3172d4e1fcbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 3
-  knockTime: 0.2
-  damage: 1
+  thrust: 1
+  knockTime: 0.3
+  otherTag: Player
 --- !u!114 &-2143273628338080818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,13 +258,15 @@ MonoBehaviour:
   currentState: 0
   maxHealth: {fileID: 11400000, guid: 78dbc963abd4e284a982e3dd8d599ebf, type: 2}
   health: 2
-  enmeyName: Range Log
+  enemyName: 
   baseAttack: 1
   moveSpeed: 1
-  homePosition: {x: 0, y: 0, z: 0}
+  homePosition: {x: 0, y: 0}
   deathEffect: {fileID: 973623078033375646, guid: 6a2b923bef49bff43838ced0c6618941, type: 3}
+  lootTable: {fileID: 0}
+  roomSignal: {fileID: 0}
   logrb: {fileID: 0}
+  animator: {fileID: 0}
   target: {fileID: 0}
   chaseRadius: 3
   attackRadius: 0.9
-  animator: {fileID: 0}
